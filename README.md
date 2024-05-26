@@ -1,16 +1,11 @@
 # priority_soft_task
 
-A new Flutter project.
-
 ## Getting Started
+Build on 
+Flutter Version::3.19.2
+Dart Version :: 3.3.0
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+Figma Design
+https://www.figma.com/design/hWQUR1ByavH4Dn2AyOIYH7/Code-Test-for-Shoesly---Brand-Marketplace-Apps-UI-Kit?node-id=1-6&t=vmyijHQxfJzPxq3b-0
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
