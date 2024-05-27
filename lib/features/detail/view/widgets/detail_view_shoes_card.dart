@@ -25,13 +25,16 @@ class DetailViewShoesCard extends StatelessWidget {
         alignment: AlignmentDirectional.bottomCenter,
         children: [
           Positioned(
-            bottom: 60.h,
+            bottom: 40.h,
             child: Hero(
               tag: '2',
               child: CachedNetworkImage(
+                fit: BoxFit.contain,
                 imageUrl: shoesUrl,
+                height: 250.w,
+                width: 250.w,
                 placeholder: (context, url) => const Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(30.0),
                   child: Center(
                     child: CircularProgressIndicator(),
                   ),
