@@ -7,5 +7,7 @@ class ReviewAllState with _$ReviewAllState {
 
   const factory ReviewAllState({
     @Default(0) int selectedTabIndex,
+    @Default([])  List<Review> reviewsData,
+    @Default(false)  bool isLoading,
   }) = _ReviewALlState;
 }

@@ -1,11 +1,15 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:priority_soft_task/common/ui.dart';
+import 'package:priority_soft_task/core/modes/shoes_model.dart';
 import 'package:priority_soft_task/features/review_all/logic/review_all_cubit.dart';
 
 class ReviewAllTabs extends StatelessWidget {
   const ReviewAllTabs({
     super.key,
+    required this.review,
   });
+
+  final List<Review> review;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,22 @@ class ReviewAllTabs extends StatelessWidget {
             builder: (BuildContext context, selectedIndex) {
               final cubit = context.read<ReviewALlCubit>();
               return GestureDetector(
-                onTap: () {
+                onTap: () async {
+                  if (index > 0) {
+                    final selectedStar =
+                        AppStrings.reviewALlTabs[index].split(' ');
+                    final star = selectedStar[0];
+                    await cubit.searchReviews(
+                      reviews: review,
+                      searchTerm: star,
+                    );
+                  } else {
+                    await cubit.searchReviews(
+                      reviews: review,
+                      searchTerm: '',
+                      isInitial: true,
+                    );
+                  }
                   cubit.onTabSelected(index);
                 },
                 child: Padding(

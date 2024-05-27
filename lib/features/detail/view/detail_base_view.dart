@@ -1,5 +1,8 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:priority_soft_task/common/ui.dart';
+import 'package:priority_soft_task/core/modes/shoes_model.dart';
 import 'package:priority_soft_task/core/router/app_route.dart';
+import 'package:priority_soft_task/features/detail/logic/detail_cubit.dart';
 import 'package:priority_soft_task/features/detail/view/widgets/add_to_card_bottom_sheet.dart';
 import 'package:priority_soft_task/features/detail/view/widgets/add_to_card_contents.dart';
 import 'package:priority_soft_task/features/detail/view/widgets/detail_rating_text.dart';
@@ -9,7 +12,12 @@ import 'package:priority_soft_task/features/detail/view/widgets/review_detail_ca
 import 'package:priority_soft_task/features/detail/view/widgets/shoes_size_builder.dart';
 
 class DetailBaseView extends StatefulWidget {
-  const DetailBaseView({super.key});
+  const DetailBaseView({
+    super.key,
+    required this.selectedShoesData,
+  });
+
+  final ShoesModel selectedShoesData;
 
   @override
   State<DetailBaseView> createState() => _DetailBaseViewState();
@@ -17,7 +25,14 @@ class DetailBaseView extends StatefulWidget {
 
 class _DetailBaseViewState extends State<DetailBaseView> {
   @override
+  void initState() {
+    BlocProvider.of<DetailCubit>(context).onInit();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final selectedData = widget.selectedShoesData;
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: true,
@@ -27,13 +42,14 @@ class _DetailBaseViewState extends State<DetailBaseView> {
           showModalBottomSheet<void>(
             isScrollControlled: true,
             context: context,
-            builder: (final BuildContext context) =>
-                const AddToCardBottomSheetItems(),
+            builder: (final BuildContext context) => AddToCardBottomSheetItems(
+              selectedShoesData: selectedData,
+            ),
           );
         },
         buttonText: 'ADD TO CART',
         amountText: 'Price',
-        amount: '\$250',
+        amount: '\$${selectedData.price}',
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -57,21 +73,30 @@ class _DetailBaseViewState extends State<DetailBaseView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const DetailViewShoesCard(),
+                    DetailViewShoesCard(
+                      shoesUrl: selectedData.image ?? '',
+                    ),
                     30.toHGap(),
                     Text(
-                      'Jordan 1 Retro High Tie Dye',
+                      selectedData.title ?? '',
                       style: AppTextStyle.headline600,
                     ),
                     12.toHGap(),
-                    const DetailRatingText(),
+                    DetailRatingText(
+                      rating: double.parse(
+                              selectedData.rating?.toString() ?? '0') ??
+                          0,
+                      totalReview: selectedData.totalReview ?? '',
+                    ),
                     32.toHGap(),
                     Text(
                       'Size',
                       style: AppTextStyle.headline400,
                     ),
                     10.toHGap(),
-                    const ShoesSizeBuilder(),
+                    ShoesSizeBuilder(
+                      sizes: selectedData.sizes ?? [],
+                    ),
                     30.toHGap(),
                     Text(
                       'Description',
@@ -79,16 +104,14 @@ class _DetailBaseViewState extends State<DetailBaseView> {
                     ),
                     10.toHGap(),
                     Text(
-                      'Engineered to crush any movement-based workout, these '
-                      'On sneakers enhance the label\'s original Cloud'
-                      ' sneaker with cutting edge technologies for a pair. ',
+                      selectedData.description ?? '',
                       style: AppTextStyle.bodyText200.copyWith(
                         color: AppColor.primaryNeutral400,
                       ),
                     ),
                     30.toHGap(),
                     Text(
-                      'Review (1045)',
+                      'Review (${selectedData.totalReview})',
                       style: AppTextStyle.headline400,
                     ),
                     10.toHGap(),
@@ -101,7 +124,9 @@ class _DetailBaseViewState extends State<DetailBaseView> {
                           context,
                           index,
                         ) {
-                          return const ReviewDetailCard();
+                          return ReviewDetailCard(
+                            review: selectedData.review?[index],
+                          );
                         }),
                     AppOutlineButton(
                       width: 1.sw,
@@ -109,6 +134,7 @@ class _DetailBaseViewState extends State<DetailBaseView> {
                       isLoading: false,
                       onTap: () {
                         router.pushNamed(
+                          extra: selectedData.review,
                           AppRoute.reviewAll.name,
                         );
                       },

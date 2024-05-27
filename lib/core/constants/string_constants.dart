@@ -4,10 +4,14 @@ class AppStrings {
     "Nike",
     "Jordan",
     "Adidas",
-    "Reebok"
+    "Vens",
+    "Reebok",
+    "Nike",
+    "Puma",
+    "Calibar"
   ];
   static List<String> reviewALlTabs = [
-    "All",
+    "All ",
     "5 Stars",
     "4 Stars",
     "3 Stars",

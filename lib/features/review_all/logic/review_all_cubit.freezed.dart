@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ReviewAllState {
   int get selectedTabIndex => throw _privateConstructorUsedError;
+  List<Review> get reviewsData => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReviewAllStateCopyWith<ReviewAllState> get copyWith =>
@@ -29,7 +31,7 @@ abstract class $ReviewAllStateCopyWith<$Res> {
           ReviewAllState value, $Res Function(ReviewAllState) then) =
       _$ReviewAllStateCopyWithImpl<$Res, ReviewAllState>;
   @useResult
-  $Res call({int selectedTabIndex});
+  $Res call({int selectedTabIndex, List<Review> reviewsData, bool isLoading});
 }
 
 /// @nodoc
@@ -46,12 +48,22 @@ class _$ReviewAllStateCopyWithImpl<$Res, $Val extends ReviewAllState>
   @override
   $Res call({
     Object? selectedTabIndex = null,
+    Object? reviewsData = null,
+    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
       selectedTabIndex: null == selectedTabIndex
           ? _value.selectedTabIndex
           : selectedTabIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      reviewsData: null == reviewsData
+          ? _value.reviewsData
+          : reviewsData // ignore: cast_nullable_to_non_nullable
+              as List<Review>,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -64,7 +76,7 @@ abstract class _$$ReviewALlStateImplCopyWith<$Res>
       __$$ReviewALlStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int selectedTabIndex});
+  $Res call({int selectedTabIndex, List<Review> reviewsData, bool isLoading});
 }
 
 /// @nodoc
@@ -79,12 +91,22 @@ class __$$ReviewALlStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? selectedTabIndex = null,
+    Object? reviewsData = null,
+    Object? isLoading = null,
   }) {
     return _then(_$ReviewALlStateImpl(
       selectedTabIndex: null == selectedTabIndex
           ? _value.selectedTabIndex
           : selectedTabIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      reviewsData: null == reviewsData
+          ? _value._reviewsData
+          : reviewsData // ignore: cast_nullable_to_non_nullable
+              as List<Review>,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -92,15 +114,32 @@ class __$$ReviewALlStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ReviewALlStateImpl extends _ReviewALlState {
-  const _$ReviewALlStateImpl({this.selectedTabIndex = 0}) : super._();
+  const _$ReviewALlStateImpl(
+      {this.selectedTabIndex = 0,
+      final List<Review> reviewsData = const [],
+      this.isLoading = false})
+      : _reviewsData = reviewsData,
+        super._();
 
   @override
   @JsonKey()
   final int selectedTabIndex;
+  final List<Review> _reviewsData;
+  @override
+  @JsonKey()
+  List<Review> get reviewsData {
+    if (_reviewsData is EqualUnmodifiableListView) return _reviewsData;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_reviewsData);
+  }
+
+  @override
+  @JsonKey()
+  final bool isLoading;
 
   @override
   String toString() {
-    return 'ReviewAllState(selectedTabIndex: $selectedTabIndex)';
+    return 'ReviewAllState(selectedTabIndex: $selectedTabIndex, reviewsData: $reviewsData, isLoading: $isLoading)';
   }
 
   @override
@@ -109,11 +148,16 @@ class _$ReviewALlStateImpl extends _ReviewALlState {
         (other.runtimeType == runtimeType &&
             other is _$ReviewALlStateImpl &&
             (identical(other.selectedTabIndex, selectedTabIndex) ||
-                other.selectedTabIndex == selectedTabIndex));
+                other.selectedTabIndex == selectedTabIndex) &&
+            const DeepCollectionEquality()
+                .equals(other._reviewsData, _reviewsData) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, selectedTabIndex);
+  int get hashCode => Object.hash(runtimeType, selectedTabIndex,
+      const DeepCollectionEquality().hash(_reviewsData), isLoading);
 
   @JsonKey(ignore: true)
   @override
@@ -124,12 +168,18 @@ class _$ReviewALlStateImpl extends _ReviewALlState {
 }
 
 abstract class _ReviewALlState extends ReviewAllState {
-  const factory _ReviewALlState({final int selectedTabIndex}) =
-      _$ReviewALlStateImpl;
+  const factory _ReviewALlState(
+      {final int selectedTabIndex,
+      final List<Review> reviewsData,
+      final bool isLoading}) = _$ReviewALlStateImpl;
   const _ReviewALlState._() : super._();
 
   @override
   int get selectedTabIndex;
+  @override
+  List<Review> get reviewsData;
+  @override
+  bool get isLoading;
   @override
   @JsonKey(ignore: true)
   _$$ReviewALlStateImplCopyWith<_$ReviewALlStateImpl> get copyWith =>

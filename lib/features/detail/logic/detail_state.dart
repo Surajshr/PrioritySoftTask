@@ -6,6 +6,7 @@ class DetailState with _$DetailState {
   const factory DetailState({
     @Default(0) int selectedColorIndex,
     @Default(0) int sizeActiveIndex,
+    @Default('0') String selectedSize,
     @Default(0) int itemCount,
     @Default(false) bool isAddClick,
   }) = _DetailState;

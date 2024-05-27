@@ -1,10 +1,14 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:priority_soft_task/common/ui.dart';
 import 'package:priority_soft_task/features/detail/view/widgets/color_card.dart';
 
 class DetailViewShoesCard extends StatelessWidget {
   const DetailViewShoesCard({
     super.key,
+    required this.shoesUrl,
   });
+
+  final String shoesUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +24,25 @@ class DetailViewShoesCard extends StatelessWidget {
       child: Stack(
         alignment: AlignmentDirectional.bottomCenter,
         children: [
-          Hero(
-            tag: '2',
-            child: Image.asset(
-              height: 300.h,
-              width: 300.h,
-              Assets.jordan,
+          Positioned(
+            bottom: 60.h,
+            child: Hero(
+              tag: '2',
+              child: CachedNetworkImage(
+                imageUrl: shoesUrl,
+                placeholder: (context, url) => const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+                errorWidget: (context, url, error) => Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 50.w,
+                  ),
+                  child: const Icon(Icons.error),
+                ),
+              ),
             ),
           ),
           Row(
@@ -33,8 +50,8 @@ class DetailViewShoesCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: 25.0,
-                width: 100.0,
+                height: 25.w,
+                width: 150.w,
                 child: Padding(
                   padding: EdgeInsets.only(
                     left: 20.w,
@@ -43,9 +60,9 @@ class DetailViewShoesCard extends StatelessWidget {
                   child: ListView.builder(
                     padding: EdgeInsets.zero,
                     itemBuilder: (
-                        context,
-                        index,
-                        ) {
+                      context,
+                      index,
+                    ) {
                       return Container(
                         width: 6.w,
                         height: 6.w,

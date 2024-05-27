@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:priority_soft_task/common/ui.dart';
 
 class ShoesCard extends StatelessWidget {
@@ -12,6 +13,7 @@ class ShoesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    dPrint('providedImageURL:$shoesImage');
     return Container(
       height: 200.h,
       decoration: BoxDecoration(
@@ -38,10 +40,20 @@ class ShoesCard extends StatelessWidget {
             Expanded(
               child: Hero(
                 tag: shoesIndex,
-                child: Image.asset(
-                  // height: 85.h,
-                  // width: 120.w,
-                  shoesImage,
+                child: CachedNetworkImage(
+                  imageUrl: shoesImage,
+                  placeholder: (context, url) => const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                  errorWidget: (context, url, error) => Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 50.w,
+                    ),
+                    child: const Icon(Icons.error),
+                  ),
                 ),
               ),
             ),

@@ -6,6 +6,8 @@ class CartState with _$CartState {
   const factory CartState({
 
     @Default(0) int itemCount,
+    @Default(false) bool isLoading,
+    @Default([]) List<AddedToCardModel> addedToCardItems,
 
   }) = _CartState;
 }

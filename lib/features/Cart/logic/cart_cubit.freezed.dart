@@ -17,6 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$CartState {
   int get itemCount => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+  List<AddedToCardModel> get addedToCardItems =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CartStateCopyWith<CartState> get copyWith =>
@@ -28,7 +31,8 @@ abstract class $CartStateCopyWith<$Res> {
   factory $CartStateCopyWith(CartState value, $Res Function(CartState) then) =
       _$CartStateCopyWithImpl<$Res, CartState>;
   @useResult
-  $Res call({int itemCount});
+  $Res call(
+      {int itemCount, bool isLoading, List<AddedToCardModel> addedToCardItems});
 }
 
 /// @nodoc
@@ -45,12 +49,22 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
   @override
   $Res call({
     Object? itemCount = null,
+    Object? isLoading = null,
+    Object? addedToCardItems = null,
   }) {
     return _then(_value.copyWith(
       itemCount: null == itemCount
           ? _value.itemCount
           : itemCount // ignore: cast_nullable_to_non_nullable
               as int,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      addedToCardItems: null == addedToCardItems
+          ? _value.addedToCardItems
+          : addedToCardItems // ignore: cast_nullable_to_non_nullable
+              as List<AddedToCardModel>,
     ) as $Val);
   }
 }
@@ -63,7 +77,8 @@ abstract class _$$CartStateImplCopyWith<$Res>
       __$$CartStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int itemCount});
+  $Res call(
+      {int itemCount, bool isLoading, List<AddedToCardModel> addedToCardItems});
 }
 
 /// @nodoc
@@ -78,12 +93,22 @@ class __$$CartStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? itemCount = null,
+    Object? isLoading = null,
+    Object? addedToCardItems = null,
   }) {
     return _then(_$CartStateImpl(
       itemCount: null == itemCount
           ? _value.itemCount
           : itemCount // ignore: cast_nullable_to_non_nullable
               as int,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      addedToCardItems: null == addedToCardItems
+          ? _value._addedToCardItems
+          : addedToCardItems // ignore: cast_nullable_to_non_nullable
+              as List<AddedToCardModel>,
     ));
   }
 }
@@ -91,15 +116,32 @@ class __$$CartStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CartStateImpl extends _CartState {
-  const _$CartStateImpl({this.itemCount = 0}) : super._();
+  const _$CartStateImpl(
+      {this.itemCount = 0,
+      this.isLoading = false,
+      final List<AddedToCardModel> addedToCardItems = const []})
+      : _addedToCardItems = addedToCardItems,
+        super._();
 
   @override
   @JsonKey()
   final int itemCount;
+  @override
+  @JsonKey()
+  final bool isLoading;
+  final List<AddedToCardModel> _addedToCardItems;
+  @override
+  @JsonKey()
+  List<AddedToCardModel> get addedToCardItems {
+    if (_addedToCardItems is EqualUnmodifiableListView)
+      return _addedToCardItems;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_addedToCardItems);
+  }
 
   @override
   String toString() {
-    return 'CartState(itemCount: $itemCount)';
+    return 'CartState(itemCount: $itemCount, isLoading: $isLoading, addedToCardItems: $addedToCardItems)';
   }
 
   @override
@@ -108,11 +150,16 @@ class _$CartStateImpl extends _CartState {
         (other.runtimeType == runtimeType &&
             other is _$CartStateImpl &&
             (identical(other.itemCount, itemCount) ||
-                other.itemCount == itemCount));
+                other.itemCount == itemCount) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            const DeepCollectionEquality()
+                .equals(other._addedToCardItems, _addedToCardItems));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, itemCount);
+  int get hashCode => Object.hash(runtimeType, itemCount, isLoading,
+      const DeepCollectionEquality().hash(_addedToCardItems));
 
   @JsonKey(ignore: true)
   @override
@@ -122,11 +169,18 @@ class _$CartStateImpl extends _CartState {
 }
 
 abstract class _CartState extends CartState {
-  const factory _CartState({final int itemCount}) = _$CartStateImpl;
+  const factory _CartState(
+      {final int itemCount,
+      final bool isLoading,
+      final List<AddedToCardModel> addedToCardItems}) = _$CartStateImpl;
   const _CartState._() : super._();
 
   @override
   int get itemCount;
+  @override
+  bool get isLoading;
+  @override
+  List<AddedToCardModel> get addedToCardItems;
   @override
   @JsonKey(ignore: true)
   _$$CartStateImplCopyWith<_$CartStateImpl> get copyWith =>

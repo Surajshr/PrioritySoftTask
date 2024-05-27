@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$DetailState {
   int get selectedColorIndex => throw _privateConstructorUsedError;
   int get sizeActiveIndex => throw _privateConstructorUsedError;
+  String get selectedSize => throw _privateConstructorUsedError;
   int get itemCount => throw _privateConstructorUsedError;
   bool get isAddClick => throw _privateConstructorUsedError;
 
@@ -35,6 +36,7 @@ abstract class $DetailStateCopyWith<$Res> {
   $Res call(
       {int selectedColorIndex,
       int sizeActiveIndex,
+      String selectedSize,
       int itemCount,
       bool isAddClick});
 }
@@ -54,6 +56,7 @@ class _$DetailStateCopyWithImpl<$Res, $Val extends DetailState>
   $Res call({
     Object? selectedColorIndex = null,
     Object? sizeActiveIndex = null,
+    Object? selectedSize = null,
     Object? itemCount = null,
     Object? isAddClick = null,
   }) {
@@ -66,6 +69,10 @@ class _$DetailStateCopyWithImpl<$Res, $Val extends DetailState>
           ? _value.sizeActiveIndex
           : sizeActiveIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      selectedSize: null == selectedSize
+          ? _value.selectedSize
+          : selectedSize // ignore: cast_nullable_to_non_nullable
+              as String,
       itemCount: null == itemCount
           ? _value.itemCount
           : itemCount // ignore: cast_nullable_to_non_nullable
@@ -89,6 +96,7 @@ abstract class _$$DetailStateImplCopyWith<$Res>
   $Res call(
       {int selectedColorIndex,
       int sizeActiveIndex,
+      String selectedSize,
       int itemCount,
       bool isAddClick});
 }
@@ -106,6 +114,7 @@ class __$$DetailStateImplCopyWithImpl<$Res>
   $Res call({
     Object? selectedColorIndex = null,
     Object? sizeActiveIndex = null,
+    Object? selectedSize = null,
     Object? itemCount = null,
     Object? isAddClick = null,
   }) {
@@ -118,6 +127,10 @@ class __$$DetailStateImplCopyWithImpl<$Res>
           ? _value.sizeActiveIndex
           : sizeActiveIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      selectedSize: null == selectedSize
+          ? _value.selectedSize
+          : selectedSize // ignore: cast_nullable_to_non_nullable
+              as String,
       itemCount: null == itemCount
           ? _value.itemCount
           : itemCount // ignore: cast_nullable_to_non_nullable
@@ -136,6 +149,7 @@ class _$DetailStateImpl extends _DetailState {
   const _$DetailStateImpl(
       {this.selectedColorIndex = 0,
       this.sizeActiveIndex = 0,
+      this.selectedSize = '0',
       this.itemCount = 0,
       this.isAddClick = false})
       : super._();
@@ -148,6 +162,9 @@ class _$DetailStateImpl extends _DetailState {
   final int sizeActiveIndex;
   @override
   @JsonKey()
+  final String selectedSize;
+  @override
+  @JsonKey()
   final int itemCount;
   @override
   @JsonKey()
@@ -155,7 +172,7 @@ class _$DetailStateImpl extends _DetailState {
 
   @override
   String toString() {
-    return 'DetailState(selectedColorIndex: $selectedColorIndex, sizeActiveIndex: $sizeActiveIndex, itemCount: $itemCount, isAddClick: $isAddClick)';
+    return 'DetailState(selectedColorIndex: $selectedColorIndex, sizeActiveIndex: $sizeActiveIndex, selectedSize: $selectedSize, itemCount: $itemCount, isAddClick: $isAddClick)';
   }
 
   @override
@@ -167,6 +184,8 @@ class _$DetailStateImpl extends _DetailState {
                 other.selectedColorIndex == selectedColorIndex) &&
             (identical(other.sizeActiveIndex, sizeActiveIndex) ||
                 other.sizeActiveIndex == sizeActiveIndex) &&
+            (identical(other.selectedSize, selectedSize) ||
+                other.selectedSize == selectedSize) &&
             (identical(other.itemCount, itemCount) ||
                 other.itemCount == itemCount) &&
             (identical(other.isAddClick, isAddClick) ||
@@ -174,8 +193,8 @@ class _$DetailStateImpl extends _DetailState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, selectedColorIndex, sizeActiveIndex, itemCount, isAddClick);
+  int get hashCode => Object.hash(runtimeType, selectedColorIndex,
+      sizeActiveIndex, selectedSize, itemCount, isAddClick);
 
   @JsonKey(ignore: true)
   @override
@@ -188,6 +207,7 @@ abstract class _DetailState extends DetailState {
   const factory _DetailState(
       {final int selectedColorIndex,
       final int sizeActiveIndex,
+      final String selectedSize,
       final int itemCount,
       final bool isAddClick}) = _$DetailStateImpl;
   const _DetailState._() : super._();
@@ -196,6 +216,8 @@ abstract class _DetailState extends DetailState {
   int get selectedColorIndex;
   @override
   int get sizeActiveIndex;
+  @override
+  String get selectedSize;
   @override
   int get itemCount;
   @override

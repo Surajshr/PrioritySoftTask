@@ -5,9 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:priority_soft_task/core/router/app_route.dart';
 import 'package:priority_soft_task/core/services/start_up_service.dart';
+import 'package:priority_soft_task/features/Cart/logic/cart_cubit.dart';
 import 'package:priority_soft_task/features/detail/logic/detail_cubit.dart';
 import 'package:priority_soft_task/features/home/logic/home_cubit.dart';
 import 'package:priority_soft_task/features/home/view/home_base_view.dart';
+import 'package:priority_soft_task/features/review_all/logic/review_all_cubit.dart';
 
 import '../../common/ui.dart';
 
@@ -55,6 +57,12 @@ class _MyAppState extends State<MyApp> {
             ),
             BlocProvider(
               create: (context) => DetailCubit(),
+            ),
+            BlocProvider(
+              create: (context) => ReviewALlCubit(),
+            ),
+            BlocProvider(
+              create: (context) => CartCubit(),
             ),
           ],
           child: MaterialApp.router(

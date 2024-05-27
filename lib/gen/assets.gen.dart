@@ -101,6 +101,7 @@ class Assets {
   Assets._();
 
   static const $AssetsBrandIconGen brandIcon = $AssetsBrandIconGen();
+  static const AssetGenImage empty = AssetGenImage('assets/empty.jpg');
   static const String logo = 'assets/logo.svg';
   static const AssetGenImage person = AssetGenImage('assets/person.png');
   static const $AssetsShoesGen shoes = $AssetsShoesGen();
@@ -109,7 +110,7 @@ class Assets {
   static const $AssetsSvgGen svg = $AssetsSvgGen();
 
   /// List of all assets
-  static List<dynamic> get values => [logo, person, splashLogo];
+  static List<dynamic> get values => [empty, logo, person, splashLogo];
 }
 
 class AssetGenImage {

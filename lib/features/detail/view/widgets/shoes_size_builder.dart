@@ -7,7 +7,10 @@ import 'circular_size_container.dart';
 class ShoesSizeBuilder extends StatelessWidget {
   const ShoesSizeBuilder({
     super.key,
+    required this.sizes,
   });
+
+  final List<int> sizes;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,7 @@ class ShoesSizeBuilder extends StatelessWidget {
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             shrinkWrap: true,
-            itemCount: AppStrings.shoesSizeNumber.length,
+            itemCount: sizes.length,
             itemBuilder: (
               BuildContext context,
               int index,
@@ -28,9 +31,12 @@ class ShoesSizeBuilder extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.only(right: 8.0),
                 child: CircularSizeContainer(
-                  sizeNumber: AppStrings.shoesSizeNumber[index],
+                  sizeNumber: sizes[index].toString(),
                   onTap: () {
-                    detailBloc.onShoesSizeSelected(index);
+                    detailBloc.onShoesSizeSelected(
+                      index,
+                      sizes[index].toString(),
+                    );
                   },
                   isActive: state.sizeActiveIndex == index,
                 ),

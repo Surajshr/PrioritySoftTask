@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:priority_soft_task/common/ui.dart';
+import 'package:priority_soft_task/core/modes/shoes_model.dart';
 import 'package:priority_soft_task/features/Cart/view/carts_base_view.dart';
 import 'package:priority_soft_task/features/Filter/view/filter_base_view.dart';
 import 'package:priority_soft_task/features/detail/view/detail_base_view.dart';
@@ -43,7 +44,10 @@ final GoRouter router = GoRouter(
                   BuildContext context,
                   GoRouterState state,
                 ) {
-                  return const DetailBaseView();
+                  final shoesDetail = state.extra as ShoesModel;
+                  return DetailBaseView(
+                    selectedShoesData: shoesDetail,
+                  );
                 },
                 routes: [
                   GoRoute(
@@ -53,7 +57,10 @@ final GoRouter router = GoRouter(
                       BuildContext context,
                       GoRouterState state,
                     ) {
-                      return const ReviewAllBaseView();
+                      final reviewData = state.extra as List<Review>;
+                      return ReviewAllBaseView(
+                        review: reviewData,
+                      );
                     },
                   ),
                   GoRoute(

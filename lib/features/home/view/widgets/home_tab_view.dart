@@ -17,7 +17,7 @@ class HomeTabView extends StatelessWidget {
           left: 30.w,
         ),
         scrollDirection: Axis.horizontal,
-        itemCount: 5,
+        itemCount:  AppStrings.homeTabs.length,
         itemBuilder: (context, index) {
           return BlocSelector<HomeCubit, HomeState, int>(
             selector: (state) => state.selectedIndex,
@@ -25,7 +25,10 @@ class HomeTabView extends StatelessWidget {
               final cubit = context.read<HomeCubit>();
               return GestureDetector(
                 onTap: () {
-                  cubit.onTabSelected(index);
+                  cubit.onTabSelected(
+                    index: index,
+                    selectedBrand: AppStrings.homeTabs[index],
+                  );
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.w),

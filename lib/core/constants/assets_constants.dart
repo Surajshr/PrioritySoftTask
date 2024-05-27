@@ -17,6 +17,7 @@ class Assets {
   static const String plusCircle = 'assets/svg/add-circle.svg';
   static const String close = 'assets/svg/close.svg';
   static const String circularTick = 'assets/svg/tick-circle.svg';
+  static const String emptyIcon = 'assets/empty.jpg';
 
   ///bramds
   static const String jordanIcon = 'assets/brand_icon/jordan.svg';

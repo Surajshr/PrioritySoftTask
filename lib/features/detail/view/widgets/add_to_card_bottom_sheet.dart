@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:priority_soft_task/common/ui.dart';
+import 'package:priority_soft_task/core/modes/shoes_model.dart';
 import 'package:priority_soft_task/core/router/app_route.dart';
 import 'package:priority_soft_task/features/detail/logic/detail_cubit.dart';
 import 'package:priority_soft_task/features/detail/view/widgets/add_to_card_items.dart';
@@ -7,7 +8,10 @@ import 'package:priority_soft_task/features/detail/view/widgets/add_to_card_item
 class AddToCardBottomSheetItems extends StatelessWidget {
   const AddToCardBottomSheetItems({
     super.key,
+    required this.selectedShoesData,
   });
+
+  final ShoesModel selectedShoesData;
 
   @override
   Widget build(BuildContext context) {
@@ -135,8 +139,9 @@ class AddToCardBottomSheetItems extends StatelessWidget {
                   showModalBottomSheet<void>(
                     isScrollControlled: true,
                     context: context,
-                    builder: (final BuildContext context) =>
-                        const SuccessButtomSheet(),
+                    builder: (final BuildContext context) => SuccessButtomSheet(
+                      selectedShoesData: selectedShoesData,
+                    ),
                   );
                 },
                 buttonText: 'ADD TO CART',
@@ -158,13 +163,16 @@ class AddToCardBottomSheetItems extends StatelessWidget {
 class SuccessButtomSheet extends StatelessWidget {
   const SuccessButtomSheet({
     super.key,
+    required this.selectedShoesData,
   });
+
+  final ShoesModel selectedShoesData;
 
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<DetailCubit, DetailState, int>(
-      selector: (DetailState state) => state.itemCount,
-      builder: (BuildContext context, item) {
+    return BlocBuilder<DetailCubit, DetailState>(
+      builder: (BuildContext context, state) {
+        final detailBloc = context.read<DetailCubit>();
         return Padding(
           padding: EdgeInsets.symmetric(
             horizontal: 30.w,
@@ -183,7 +191,7 @@ class SuccessButtomSheet extends StatelessWidget {
               ),
               5.toHGap(),
               Text(
-                '$item item Total',
+                '${state.itemCount} item Total',
                 style: AppTextStyle.bodyText200.copyWith(
                   color: AppColor.primaryNeutral400,
                 ),
@@ -207,7 +215,13 @@ class SuccessButtomSheet extends StatelessWidget {
                       buttonText: 'TO CART',
                       isLoading: false,
                       onTap: () {
+                        detailBloc.addItemToCard(
+                          shoesModel: selectedShoesData,
+                          quantity: state.itemCount.toString(),
+                          size: state.selectedSize.toString(),
+                        );
                         Navigator.pop(context);
+
                         router.pushNamed(AppRoute.cart.name);
                       },
                     ),

@@ -5,3 +5,9 @@ void dPrint(String message) {
     print('debugPrint: $message');
   }
 }
+
+extension StringExtension on String {
+  String capitalize() {
+    return "${this[0].toUpperCase()}${this.substring(1).toLowerCase()}";
+  }
+}
